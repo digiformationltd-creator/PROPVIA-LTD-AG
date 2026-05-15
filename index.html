@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PROPVIA SOLUTIONS LTD | Premium Property & Business Support</title>
+    <meta name="description" content="Professional property maintenance, management, and consultancy solutions in the UK.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=DM+Sans:wght@400;500;600&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --green: #1A3C2E;
+            --green-mid: #254D3C;
+            --gold: #C9A84C;
+            --gold-light: #D4AF37;
+            --cream: #FDFCFB;
+            --cream-mid: #F5F2EE;
+            --cream-dark: #EBE7E0;
+            --black: #0A0F0D;
+            --grey: #4B5563;
+            --white: #FFFFFF;
+            --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--cream);
+            color: var(--black);
+            font-family: 'DM Sans', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Typography */
+        h1, h2, h3 { font-family: 'Cormorant Garamond', serif; font-weight: 700; }
+        .syne { font-family: 'Syne', sans-serif; text-transform: uppercase; letter-spacing: 1px; }
+        
+        /* Layout */
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+        section { padding: 100px 0; }
+        .reveal { opacity: 0; transform: translateY(30px); transition: var(--transition); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Navigation */
+        header {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            height: 90px; display: flex; align-items: center;
+            transition: var(--transition); background: transparent;
+        }
+        header.scrolled { background: var(--white); box-shadow: var(--shadow); height: 75px; }
+        
+        .nav-content { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .logo img { height: 48px; width: auto; object-fit: contain; cursor: pointer; }
+        
+        nav ul { display: flex; list-style: none; gap: 32px; align-items: center; }
+        nav a { 
+            text-decoration: none; color: var(--green); font-weight: 500; font-size: 15px;
+            transition: var(--transition); cursor: pointer;
+        }
+        nav a:hover { color: var(--gold); }
+        
+        .btn-nav {
+            background: var(--green); color: var(--cream); padding: 10px 24px;
+            border-radius: 8px; font-weight: 600;
+        }
+        .btn-nav:hover { background: var(--green-mid); transform: translateY(-2px); }
+
+        /* Mobile Bottom Nav */
+        .mobile-nav {
+            position: fixed; bottom: 0; left: 0; right: 0; background: var(--white);
+            display: none; justify-content: space-around; padding: 12px 0;
+            border-top: 1px solid var(--cream-dark); z-index: 1000;
+        }
+        @media (max-width: 767px) {
+            .mobile-nav { display: flex; }
+            header nav { display: none; }
+            body { padding-bottom: 72px; }
+        }
+
+        /* Page Transitions */
+        .page-segment { display: none; min-height: 100vh; }
+        .page-segment.active { display: block; animation: fadeIn 0.6s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Hero Blocks */
+        .mini-hero {
+            height: 55vh; min-height: 400px; position: relative;
+            display: flex; flex-direction: column; justify-content: center;
+            align-items: center; text-align: center; overflow: hidden;
+        }
+        .hero-bg-elements { position: absolute; inset: 0; pointer-events: none; }
+        .svg-ring {
+            position: absolute; width: 400px; height: 400px; top: -100px; right: -100px;
+            border: 1px solid rgba(201,168,76,0.1); border-radius: 50%;
+            animation: rotateSlow 80s linear infinite;
+        }
+        @keyframes rotateSlow { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+
+        /* Components */
+        .breadcrumb { font-size: 13px; color: var(--cream-dark); margin-bottom: 24px; cursor: default; }
+        .breadcrumb span { cursor: pointer; transition: var(--transition); }
+        .breadcrumb span:hover { color: var(--gold); }
+        
+        .eyebrow { font-family: 'Syne', sans-serif; font-size: 14px; color: var(--gold); margin-bottom: 12px; }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px);
+            border: 1px solid var(--cream-dark); border-radius: 20px; padding: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-gold {
+            background: var(--gold); color: var(--green); padding: 14px 32px;
+            border-radius: 10px; font-weight: 600; text-decoration: none;
+            display: inline-block; transition: var(--transition); border: none; cursor: pointer;
+        }
+        .btn-gold:hover { background: var(--gold-light); transform: translateY(-3px); }
+
+        /* Services Grid */
+        .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+        @media (max-width: 991px) { .services-grid { grid-template-columns: 1fr; } }
+        
+        .service-card {
+            background: var(--cream); border: 1px solid var(--cream-dark);
+            border-top: 4px solid var(--green); border-radius: 20px; padding: 40px;
+            box-shadow: var(--shadow); transition: var(--transition);
+        }
+        .service-card:hover { transform: translateY(-8px); border-top-color: var(--gold); }
+        
+        .card-header { display: flex; justify-content: space-between; align-items: flex-start; }
+        .icon-wrapper { 
+            width: 80px; height: 80px; border-radius: 50%; background: rgba(26,60,46,0.08);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .icon-wrapper svg { width: 48px; height: 48px; }
+        
+        .gold-rule { width: 40px; height: 2px; background: var(--gold); margin: 16px 0; }
+        
+        .features-list { list-style: none; margin-top: 20px; }
+        .features-list li { position: relative; padding-left: 24px; font-size: 14px; margin-bottom: 8px; color: var(--grey); }
+        .features-list li::before { content: '✓'; position: absolute; left: 0; color: var(--gold); font-weight: bold; }
+
+        /* Consultancy Grid */
+        .consultancy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        @media (max-width: 1023px) { .consultancy-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 767px) { .consultancy-grid { grid-template-columns: 1fr; } }
+        
+        .consult-card {
+            background: var(--white); border: 1px solid var(--cream-dark);
+            border-left: 3px solid var(--gold); border-radius: 16px; padding: 32px;
+            box-shadow: var(--shadow); transition: var(--transition);
+        }
+        .consult-card:hover { transform: translateY(-6px); border-left-color: var(--green); }
+
+        /* Contact Form */
+        .contact-layout { display: grid; grid-template-columns: 48% 52%; gap: 40px; }
+        @media (max-width: 991px) { .contact-layout { grid-template-columns: 1fr; } }
+        
+        .form-group { margin-bottom: 20px; }
+        input, select, textarea {
+            width: 100%; padding: 13px 16px; background: var(--cream-mid);
+            border: 1px solid var(--cream-dark); border-radius: 10px;
+            font-size: 16px; font-family: inherit; color: var(--black);
+            transition: var(--transition);
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none; border-color: var(--green);
+            box-shadow: 0 0 0 3px rgba(26,60,46,0.12);
+        }
+        
+        /* Footer */
+        footer { background: var(--green); color: var(--cream); padding: 80px 0 40px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+        @media (max-width: 991px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <header id="site-header">
+        <div class="container nav-content">
+            <div class="logo" onclick="showPage('home')">
+                <img src="assets/logo.png" alt="PROPVIA SOLUTIONS LTD">
+            </div>
+            <nav>
+                <ul>
+                    <li><a onclick="showPage('home')">Home</a></li>
+                    <li><a onclick="showPage('property')">Property Services</a></li>
+                    <li><a onclick="showPage('consultancy')">Consultancy</a></li>
+                    <li><a onclick="showPage('about')">About Us</a></li>
+                    <li><a onclick="showPage('contact')" class="btn-nav">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- PAGE SEGMENTS -->
+    
+    <!-- HOME PAGE (Segment 2) -->
+    <main id="home" class="page-segment active">
+        <section class="hero-home" style="background: var(--green); height: 100vh; display: flex; align-items: center; color: var(--cream);">
+            <div class="container">
+                <div class="reveal active">
+                    <p class="syne" style="color: var(--gold); margin-bottom: 20px;">Premium Business Solutions</p>
+                    <h1 style="font-size: 80px; line-height: 1; margin-bottom: 24px;">Elevating <br><span style="color: var(--gold);">Property</span> Standards.</h1>
+                    <p style="max-width: 600px; font-size: 18px; color: var(--cream-mid); margin-bottom: 40px;">PROPVIA SOLUTIONS LTD delivers professional property maintenance, management support, and business consultancy services across the UK.</p>
+                    <div style="display: flex; gap: 20px;">
+                        <button class="btn-gold" onclick="showPage('property')">Our Services</button>
+                        <button class="btn-gold" style="background: transparent; border: 1px solid var(--gold); color: var(--gold);" onclick="showPage('contact')">Get In Touch</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Home Content Highlights -->
+        <section style="background: var(--cream);">
+            <div class="container">
+                <div class="reveal" style="text-align: center; margin-bottom: 60px;">
+                    <h2 style="font-size: 48px; color: var(--green);">Comprehensive Solutions</h2>
+                </div>
+                <div class="services-grid">
+                    <div class="service-card reveal">
+                        <h3>Property Support</h3>
+                        <p>Reliable maintenance and management assistance for residential and commercial assets.</p>
+                    </div>
+                    <div class="service-card reveal">
+                        <h3>Business Strategy</h3>
+                        <p>Expert consultancy to optimize your business operations and drive sustainable growth.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- PROPERTY SERVICES PAGE -->
+    <main id="property" class="page-segment">
+        <section class="mini-hero" style="background: var(--green); color: var(--cream);">
+            <div class="hero-bg-elements">
+                <div class="svg-ring"></div>
+            </div>
+            <div class="container" style="position: relative; z-index: 1; padding-top: 120px;">
+                <div class="breadcrumb">
+                    <span onclick="showPage('home')">Home</span>  &nbsp;›&nbsp;  Property Services
+                </div>
+                <p class="eyebrow reveal">OUR SERVICES</p>
+                <h1 class="reveal" style="font-size: 72px;">Property Services</h1>
+                <p class="reveal" style="max-width: 640px; margin: 16px auto; color: var(--cream-mid); font-size: 17px;">
+                    Professional property maintenance, management, and project support solutions for property owners and businesses across the UK.
+                </p>
+            </div>
+        </section>
+
+        <section style="background: var(--cream); padding: 100px 0;">
+            <div class="container">
+                <div class="services-grid">
+                    <!-- Card 1 -->
+                    <div class="service-card reveal">
+                        <div class="card-header">
+                            <div class="icon-wrapper">
+                                <svg viewBox="0 0 48 48">
+                                    <path d="M4 30 L24 8 L44 30 Z" stroke="#1A3C2E" stroke-width="2" fill="none"/>
+                                    <path d="M8 30 L8 44 L40 44 L40 30" stroke="#1A3C2E" stroke-width="2" fill="none"/>
+                                    <path d="M30 8 L38 16 M32 6 a3 3 0 0 1 4 4" stroke="#C9A84C" stroke-width="2" fill="none"/>
+                                </svg>
+                            </div>
+                            <button class="btn-nav" style="padding: 8px 16px; font-size: 13px;" onclick="openModal()">Request Service →</button>
+                        </div>
+                        <h3 class="syne" style="margin-top: 24px; font-size: 22px; color: var(--green);">Property Maintenance</h3>
+                        <div class="gold-rule"></div>
+                        <p style="color: var(--grey); margin-bottom: 20px;">Professional maintenance solutions for residential and commercial properties. We coordinate repairs, upkeep, and routine maintenance.</p>
+                        <ul class="features-list">
+                            <li>General Property Maintenance & Repairs</li>
+                            <li>Repair Coordination & Scheduling</li>
+                            <li>Routine Property Inspection Support</li>
+                            <li>Ongoing Property Upkeep Management</li>
+                            <li>Maintenance Planning & Scheduling</li>
+                        </ul>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="service-card reveal">
+                        <div class="card-header">
+                            <div class="icon-wrapper">
+                                <svg viewBox="0 0 48 48">
+                                    <path d="M4 44 L4 16 L44 16 L44 44" stroke="#1A3C2E" stroke-width="2" fill="none"/>
+                                    <rect x="8" y="20" width="6" height="6" fill="#1A3C2E" fill-opacity="0.3"/>
+                                    <rect x="21" y="20" width="6" height="6" fill="#1A3C2E" fill-opacity="0.3"/>
+                                    <rect x="34" y="20" width="6" height="6" fill="#1A3C2E" fill-opacity="0.3"/>
+                                    <circle cx="38" cy="10" r="3" stroke="#C9A84C" stroke-width="2" fill="none"/>
+                                    <path d="M38 13 L38 22 M35 19 h3" stroke="#C9A84C" stroke-width="2" fill="none"/>
+                                </svg>
+                            </div>
+                            <button class="btn-nav" style="padding: 8px 16px; font-size: 13px;" onclick="openModal()">Get Support →</button>
+                        </div>
+                        <h3 class="syne" style="margin-top: 24px; font-size: 22px; color: var(--green);">Property Management Support</h3>
+                        <div class="gold-rule"></div>
+                        <p style="color: var(--grey); margin-bottom: 20px;">Reliable management assistance for property owners and landlords. We provide operational and administrative support.</p>
+                        <ul class="features-list">
+                            <li>Tenant Coordination Assistance</li>
+                            <li>Property Oversight & Monitoring</li>
+                            <li>Operational Management Assistance</li>
+                            <li>Maintenance Follow-Up Support</li>
+                            <li>Property Administration Support</li>
+                        </ul>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="service-card reveal">
+                        <div class="card-header">
+                            <div class="icon-wrapper">
+                                <svg viewBox="0 0 48 48">
+                                    <path d="M10 4 L38 4 L38 44 L10 44 Z" stroke="#1A3C2E" stroke-width="2" fill="none"/>
+                                    <path d="M18 4 L18 0 L30 0 L30 4" stroke="#C9A84C" stroke-width="2" fill="none"/>
+                                    <path d="M15 18 L33 18 M15 25 L33 25 M15 32 L25 32" stroke="#1A3C2E" stroke-width="1.5" stroke-opacity="0.5" fill="none"/>
+                                    <path d="M30 35 L38 35 L34 31 M34 39 L38 35" stroke="#C9A84C" stroke-width="2" fill="none"/>
+                                </svg>
+                            </div>
+                            <button class="btn-nav" style="padding: 8px 16px; font-size: 13px;" onclick="openModal()">Book Consultation →</button>
+                        </div>
+                        <h3 class="syne" style="margin-top: 24px; font-size: 22px; color: var(--green);">Property Project Support</h3>
+                        <div class="gold-rule"></div>
+                        <p style="color: var(--grey); margin-bottom: 20px;">Professional support for ongoing property projects and operational activities. We help coordinate and manage every aspect.</p>
+                        <ul class="features-list">
+                            <li>Project Coordination & Planning</li>
+                            <li>Vendor & Contractor Communication</li>
+                            <li>Operational Project Support</li>
+                            <li>On-Site Assistance Coordination</li>
+                            <li>Project Management Support</li>
+                        </ul>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="service-card reveal">
+                        <div class="card-header">
+                            <div class="icon-wrapper">
+                                <svg viewBox="0 0 48 48">
+                                    <circle cx="24" cy="24" r="8" stroke="#1A3C2E" stroke-width="2" fill="none"/>
+                                    <path d="M24 14 v4 M24 30 v4 M14 24 h4 M30 24 h4" stroke="#1A3C2E" stroke-width="2"/>
+                                    <path d="M30 14 L42 14 L42 38 L30 38 Z" stroke="#C9A84C" stroke-width="2" fill="none"/>
+                                    <path d="M33 20 h6 M33 25 h6 M33 30 h4" stroke="#C9A84C" stroke-width="1.5" fill="none"/>
+                                </svg>
+                            </div>
+                            <button class="btn-nav" style="padding: 8px 16px; font-size: 13px;" onclick="openModal()">Get Quote →</button>
+                        </div>
+                        <h3 class="syne" style="margin-top: 24px; font-size: 22px; color: var(--green);">Business Support Services</h3>
+                        <div class="gold-rule"></div>
+                        <p style="color: var(--grey); margin-bottom: 20px;">Helping property-related businesses improve efficiency, administration, and operations. We provide practical business support.</p>
+                        <ul class="features-list">
+                            <li>Business Operations Support</li>
+                            <li>Administrative Assistance & Coordination</li>
+                            <li>Business File & Records Coordination</li>
+                            <li>Internal Process Documentation</li>
+                            <li>Workflow Organisation Support</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section style="background: var(--green); padding: 80px 0; text-align: center; color: var(--cream);">
+            <div class="container">
+                <h3 style="font-size: 42px; margin-bottom: 12px;">Need a Specific Property Service?</h3>
+                <p style="color: var(--cream-mid); margin-bottom: 40px;">Free initial consultation — no obligation.</p>
+                <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                    <button class="btn-gold" onclick="openModal()">Request Consultation →</button>
+                    <a href="https://wa.me/447365338565" class="btn-gold" style="background: transparent; border: 1px solid var(--cream); color: var(--cream);">WhatsApp Us</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- CONSULTANCY PAGE -->
+    <main id="consultancy" class="page-segment">
+        <section class="mini-hero" style="background: var(--cream);">
+            <div style="position: absolute; right: -150px; top: 50%; transform: translateY(-50%); width: 500px; height: 500px; border-radius: 50%; border: 1px solid rgba(26,60,46,0.06);"></div>
+            <div class="container" style="position: relative; z-index: 1; padding-top: 120px;">
+                <div class="breadcrumb" style="color: var(--grey);">
+                    <span onclick="showPage('home')">Home</span>  &nbsp;›&nbsp;  Consultancy
+                </div>
+                <p class="eyebrow reveal">CONSULTANCY</p>
+                <h1 class="reveal" style="font-size: 72px; color: var(--green);">Business Consultancy Solutions</h1>
+                <p class="reveal" style="max-width: 640px; margin: 16px auto; color: var(--grey); font-size: 17px;">
+                    Professional consultancy services for businesses and individuals in the property sector. Focused on operations, growth, and success.
+                </p>
+                
+                <div style="background: rgba(201,168,76,0.08); border-left: 3px solid var(--gold); border-radius: 10px; padding: 16px 20px; margin: 40px auto; max-width: 700px; text-align: left; font-size: 14px; color: var(--grey);">
+                    ℹ️ PROPVIA SOLUTIONS LTD provides operational business support and consultancy only. We do not offer investment advice, financial lending, loan services, or interest-based financial products of any kind.
+                </div>
+            </div>
+        </section>
+
+        <section style="background: var(--cream-mid); padding: 100px 0;">
+            <div class="container">
+                <div class="consultancy-grid">
+                    <!-- Card 1 -->
+                    <div class="consult-card reveal">
+                        <div class="icon-wrapper" style="width: 56px; height: 56px; margin-bottom: 16px;">
+                            <svg viewBox="0 0 32 32">
+                                <circle cx="16" cy="12" r="6" stroke="#1A3C2E" stroke-width="2" fill="none"/>
+                                <path d="M13 18 L13 22 M19 18 L19 22 M13 22 h6" stroke="#C9A84C" stroke-width="2"/>
+                                <path d="M16 4 L16 6 M22 8 L24 6 M10 8 L8 6" stroke="#C9A84C" stroke-width="1.5"/>
+                            </svg>
+                        </div>
+                        <h3 class="syne" style="font-size: 18px; color: var(--green);">Business Consultancy</h3>
+                        <div class="gold-rule" style="width: 32px;"></div>
+                        <p style="font-size: 14px; color: var(--grey); margin-bottom: 16px;">Strategic consultancy focused on helping your company improve operations, performance, and long-term business direction.</p>
+                        <a class="syne" style="font-size: 13px; color: var(--gold); cursor: pointer; text-decoration: none;" onclick="openModal()">Get Support →</a>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="consult-card reveal">
+                        <div class="icon-wrapper" style="width: 56px; height: 56px; margin-bottom: 16px;">
+                            <svg viewBox="0 0 32 32">
+                                <circle cx="16" cy="16" r="10" stroke="#1A3C2E" stroke-width="2" fill="none"/>
+                                <circle cx="16" cy="16" r="6" stroke="#1A3C2E" stroke-width="1.5" fill="none"/>
+                                <circle cx="16" cy="16" r="2" fill="#C9A84C"/>
+                            </svg>
+                        </div>
+                        <h3 class="syne" style="font-size: 18px; color: var(--green);">Strategic Planning</h3>
+                        <div class="gold-rule" style="width: 32px;"></div>
+                        <p style="font-size: 14px; color: var(--grey); margin-bottom: 16px;">Structured planning support to help businesses set clear goals and build actionable strategies to achieve them.</p>
+                        <a class="syne" style="font-size: 13px; color: var(--gold); cursor: pointer; text-decoration: none;" onclick="openModal()">Get Support →</a>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="consult-card reveal">
+                        <div class="icon-wrapper" style="width: 56px; height: 56px; margin-bottom: 16px;">
+                            <svg viewBox="0 0 32 32">
+                                <circle cx="12" cy="16" r="6" stroke="#1A3C2E" stroke-width="2" fill="none"/>
+                                <circle cx="20" cy="16" r="6" stroke="#C9A84C" stroke-width="2" fill="none"/>
+                            </svg>
+                        </div>
+                        <h3 class="syne" style="font-size: 18px; color: var(--green);">Operational Consultancy</h3>
+                        <div class="gold-rule" style="width: 32px;"></div>
+                        <p style="font-size: 14px; color: var(--grey); margin-bottom: 16px;">We review your business operations and provide clear, practical guidance to improve efficiency and performance.</p>
+                        <a class="syne" style="font-size: 13px; color: var(--gold); cursor: pointer; text-decoration: none;" onclick="openModal()">Get Support →</a>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="consult-card reveal">
+                        <div class="icon-wrapper" style="width: 56px; height: 56px; margin-bottom: 16px;">
+                            <svg viewBox="0 0 32 32">
+                                <rect x="12" y="12" width="8" height="8" stroke="#1A3C2E" stroke-width="2" fill="none"/>
+                                <path d="M16 8 L16 4 M16 24 L16 28 M8 16 L4 16 M24 16 L28 16" stroke="#C9A84C" stroke-width="2"/>
+                                <path d="M14 4 h4 M14 28 h4 M4 14 v4 M28 14 v4" stroke="#C9A84C" stroke-width="1.5"/>
+                            </svg>
+                        </div>
+                        <h3 class="syne" style="font-size: 18px; color: var(--green);">Expansion Guidance</h3>
+                        <div class="gold-rule" style="width: 32px;"></div>
+                        <p style="font-size: 14px; color: var(--grey); margin-bottom: 16px;">Professional support for businesses planning to grow, scale, or expand operations, reach, or service offering.</p>
+                        <a class="syne" style="font-size: 13px; color: var(--gold); cursor: pointer; text-decoration: none;" onclick="openModal()">Get Support →</a>
+                    </div>
+
+                    <!-- Card 5 -->
+                    <div class="consult-card reveal">
+                        <div class="icon-wrapper" style="width: 56px; height: 56px; margin-bottom: 16px;">
+                            <svg viewBox="0 0 32 32">
+                                <path d="M6 24 c2-6 8-6 10-2 M14 22 c2-8 10-8 12-4 M10 26 c1-4 4-4 5-2" stroke="#C9A84C" stroke-width="2" fill="none"/>
+                                <path d="M4 28 h24" stroke="#1A3C2E" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="syne" style="font-size: 18px; color: var(--green);">Startup Support</h3>
+                        <div class="gold-rule" style="width: 32px;"></div>
+                        <p style="font-size: 14px; color: var(--grey); margin-bottom: 16px;">Practical guidance for entrepreneurs and new businesses getting started with the right structure and support.</p>
+                        <a class="syne" style="font-size: 13px; color: var(--gold); cursor: pointer; text-decoration: none;" onclick="openModal()">Get Support →</a>
+                    </div>
+
+                    <!-- Card 6 -->
+                    <div class="consult-card reveal">
+                        <div class="icon-wrapper" style="width: 56px; height: 56px; margin-bottom: 16px;">
+                            <svg viewBox="0 0 32 32">
+                                <path d="M6 14 L16 6 L26 14 v12 H6 Z" stroke="#1A3C2E" stroke-width="2" fill="none"/>
+                                <circle cx="24" cy="24" r="5" stroke="#C9A84C" stroke-width="2" fill="none"/>
+                                <path d="M28 28 L30 30" stroke="#C9A84C" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="syne" style="font-size: 18px; color: var(--green);">Sector Consultancy</h3>
+                        <div class="gold-rule" style="width: 32px;"></div>
+                        <p style="font-size: 14px; color: var(--grey); margin-bottom: 16px;">Specialist consultancy for businesses and individuals working within the UK property sector.</p>
+                        <a class="syne" style="font-size: 13px; color: var(--gold); cursor: pointer; text-decoration: none;" onclick="openModal()">Get Support →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us -->
+        <section style="background: var(--green); padding: 80px 0; color: var(--cream);">
+            <div class="container" style="text-align: center;">
+                <h2 style="font-size: 42px; margin-bottom: 60px;">Why Choose Our Consultancy?</h2>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;">
+                    <div>
+                        <h4 class="syne" style="color: var(--gold); margin-bottom: 12px;">Property-Focused</h4>
+                        <p style="color: var(--cream-mid); font-size: 15px;">Sector-specific operational understanding</p>
+                    </div>
+                    <div>
+                        <h4 class="syne" style="color: var(--gold); margin-bottom: 12px;">Practical Guidance</h4>
+                        <p style="color: var(--cream-mid); font-size: 15px;">Actionable, not theoretical advice</p>
+                    </div>
+                    <div>
+                        <h4 class="syne" style="color: var(--gold); margin-bottom: 12px;">Fully Compliant</h4>
+                        <p style="color: var(--cream-mid); font-size: 15px;">Ethical, professional, UK-standard services</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ABOUT US PAGE -->
+    <main id="about" class="page-segment">
+        <section class="mini-hero" style="background: var(--green); color: var(--cream);">
+            <div class="hero-bg-elements">
+                <div class="svg-ring"></div>
+                <div class="svg-ring" style="top: auto; bottom: -100px; left: -100px; right: auto;"></div>
+            </div>
+            <div class="container" style="position: relative; z-index: 1; padding-top: 120px;">
+                <div class="breadcrumb">
+                    <span onclick="showPage('home')">Home</span>  &nbsp;›&nbsp;  About Us
+                </div>
+                <p class="eyebrow reveal">WHO WE ARE</p>
+                <h1 class="reveal" style="font-size: 72px;">Our Story & Mission</h1>
+                <p class="reveal" style="max-width: 640px; margin: 16px auto; color: var(--cream-mid); font-size: 17px;">
+                    Dedicated to elevating property standards through professional maintenance and strategic business consultancy.
+                </p>
+            </div>
+        </section>
+
+        <section style="background: var(--cream); padding: 100px 0;">
+            <div class="container">
+                <div class="contact-layout">
+                    <div class="reveal">
+                        <p class="eyebrow">OUR MISSION</p>
+                        <h2 style="font-size: 48px; color: var(--green); margin-bottom: 24px;">Excellence in Every Square Foot</h2>
+                        <p style="color: var(--grey); margin-bottom: 20px;">At PROPVIA SOLUTIONS LTD, our mission is to provide property owners and businesses with reliable, professional, and high-quality support services that simplify operations and enhance property value.</p>
+                        <p style="color: var(--grey); margin-bottom: 40px;">We believe in a hands-on approach, combining deep sector knowledge with practical execution to deliver results that matter to our clients across the UK.</p>
+                        <a onclick="showPage('contact')" class="btn-gold">Get In Touch</a>
+                    </div>
+                    <div class="reveal" style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                        <div style="text-align: center;">
+                            <h4 style="font-size: 48px; color: var(--gold); font-family: 'Cormorant Garamond';">100%</h4>
+                            <p style="font-size: 14px; color: var(--grey);">Client Satisfaction</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <h4 style="font-size: 48px; color: var(--gold); font-family: 'Cormorant Garamond';">UK</h4>
+                            <p style="font-size: 14px; color: var(--grey);">Wide Coverage</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <h4 style="font-size: 48px; color: var(--gold); font-family: 'Cormorant Garamond';">24H</h4>
+                            <p style="font-size: 14px; color: var(--grey);">Response Time</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <h4 style="font-size: 48px; color: var(--gold); font-family: 'Cormorant Garamond';">17k+</h4>
+                            <p style="font-size: 14px; color: var(--grey);">Company ID</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section style="background: var(--green); padding: 80px 0; color: var(--cream);">
+            <div class="container">
+                <h2 style="text-align: center; font-size: 42px; margin-bottom: 60px;">What We Do</h2>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
+                    <div class="glass-card" style="background: rgba(255,255,255,0.05); color: var(--cream); border-color: rgba(255,255,255,0.1);">
+                        <h4 class="syne" style="margin-bottom: 16px;">🏠 Property Services</h4>
+                        <p style="font-size: 14px; color: var(--cream-mid);">End-to-end maintenance and management support for your assets.</p>
+                    </div>
+                    <div class="glass-card" style="background: rgba(255,255,255,0.05); color: var(--cream); border-color: rgba(255,255,255,0.1);">
+                        <h4 class="syne" style="margin-bottom: 16px;">💼 Business Consultancy</h4>
+                        <p style="font-size: 14px; color: var(--cream-mid);">Strategic guidance to scale and optimize your property business.</p>
+                    </div>
+                    <div class="glass-card" style="background: rgba(255,255,255,0.05); color: var(--cream); border-color: rgba(255,255,255,0.1);">
+                        <h4 class="syne" style="margin-bottom: 16px;">🤝 Ongoing Support</h4>
+                        <p style="font-size: 14px; color: var(--cream-mid);">Continuous operational assistance to ensure seamless performance.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section style="background: var(--cream); padding: 80px 0;">
+            <div class="container">
+                <div class="glass-card" style="max-width: 600px; margin: 0 auto; text-align: center;">
+                    <img src="assets/logo.png" id="about-logo" style="height: 60px; margin-bottom: 30px;" alt="Logo">
+                    <h3 style="margin-bottom: 20px; font-size: 28px; color: var(--green);">Company Details</h3>
+                    <div style="text-align: left; color: var(--grey); font-size: 15px;">
+                        <p style="margin-bottom: 12px;"><strong>Company No:</strong> 17044310</p>
+                        <p style="margin-bottom: 12px;"><strong>Address:</strong> 50 Princes Street, Ipswich, IP1 1RJ, England</p>
+                        <p style="margin-bottom: 12px;"><strong>Email:</strong> Propviasolutions@gmail.com</p>
+                        <p style="margin-bottom: 12px;"><strong>Phone:</strong> +44 7365 338565</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- CONTACT PAGE -->
+    <main id="contact" class="page-segment">
+        <section class="mini-hero" style="background: linear-gradient(to bottom, var(--gold), #D4AF37); height: 40vh;">
+            <div class="container">
+                <p class="eyebrow" style="color: var(--green-mid);">GET IN TOUCH</p>
+                <h1 style="font-size: 72px; color: var(--green);">Contact Us</h1>
+            </div>
+        </section>
+
+        <section style="background: var(--cream); padding: 100px 0;">
+            <div class="container">
+                <div class="contact-layout">
+                    <!-- Left: Info -->
+                    <div class="glass-card reveal" style="padding: 40px;">
+                        <img src="assets/logo.png" id="contact-logo" style="height: 48px; margin-bottom: 20px;" alt="Logo">
+                        <div class="gold-rule" style="width: 100%;"></div>
+                        
+                        <div style="margin-top: 30px;">
+                            <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+                                <span style="color: var(--green); font-size: 20px;">📍</span>
+                                <p style="font-size: 15px; color: var(--grey);">50 Princes Street, Ipswich, IP1 1RJ, England</p>
+                            </div>
+                            <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+                                <span style="color: var(--green); font-size: 20px;">✉️</span>
+                                <p style="font-size: 15px; color: var(--grey);">Propviasolutions@gmail.com</p>
+                            </div>
+                            <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+                                <span style="color: var(--green); font-size: 20px;">📞</span>
+                                <p style="font-size: 15px; color: var(--grey);">+44 7365 338565</p>
+                            </div>
+                            <div style="display: flex; gap: 12px; margin-bottom: 30px;">
+                                <span style="color: var(--green); font-size: 20px;">🏢</span>
+                                <p style="font-size: 15px; color: var(--grey);">Company No. 17044310</p>
+                            </div>
+                        </div>
+
+                        <a href="https://wa.me/447365338565" style="display: flex; align-items: center; justify-content: center; gap: 10px; background: #25D366; color: white; height: 52px; border-radius: 10px; text-decoration: none; font-weight: 600;">
+                            <span>💬</span> Message us on WhatsApp
+                        </a>
+
+                        <div style="margin-top: 40px;">
+                            <h4 class="syne" style="font-size: 14px; margin-bottom: 20px;">What Happens Next:</h4>
+                            <div style="margin-bottom: 12px;">
+                                <p style="font-size: 13px; font-weight: 700; color: var(--green);">01. Submit inquiry or WhatsApp us</p>
+                                <p style="font-size: 12px; color: var(--grey);">Share your specific requirements with our team.</p>
+                            </div>
+                            <div style="margin-bottom: 12px;">
+                                <p style="font-size: 13px; font-weight: 700; color: var(--green);">02. We review your requirements</p>
+                                <p style="font-size: 12px; color: var(--grey);">Our specialists analyze the best path forward.</p>
+                            </div>
+                            <div style="margin-bottom: 12px;">
+                                <p style="font-size: 13px; font-weight: 700; color: var(--green);">03. Free consultation within 24 hours</p>
+                                <p style="font-size: 12px; color: var(--grey);">We'll schedule a call to discuss the solution.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Form -->
+                    <div class="glass-card reveal" style="border-top: 4px solid var(--gold); padding: 40px;">
+                        <h3 class="syne" style="color: var(--green); font-size: 24px; margin-bottom: 8px;">Send Us a Message</h3>
+                        <p style="color: var(--grey); font-size: 14px; margin-bottom: 30px;">We respond to all enquiries within 24 hours.</p>
+                        
+                        <form id="contact-form" onsubmit="handleFormSubmit(event)">
+                            <div class="form-group">
+                                <input type="text" placeholder="Your full name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="Email Address" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" placeholder="Phone Number (e.g. 07xxx xxxxxx)">
+                            </div>
+                            <div class="form-group">
+                                <select required>
+                                    <option value="" disabled selected>Select Service</option>
+                                    <option>Property Maintenance</option>
+                                    <option>Property Management Support</option>
+                                    <option>Property Project Support</option>
+                                    <option>Business Support Services</option>
+                                    <option>Business Consultancy</option>
+                                    <option>General Enquiry</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <textarea rows="5" placeholder="Tell us about your requirements..."></textarea>
+                            </div>
+                            <button type="submit" class="btn-gold" style="width: 100%; background: var(--green); color: var(--cream);">Submit Inquiry →</button>
+                        </form>
+
+                        <div id="success-message" style="display: none; text-align: center; padding: 40px 0;">
+                            <div style="font-size: 48px; color: var(--green); margin-bottom: 20px;">✅</div>
+                            <h3 style="font-family: 'Cormorant Garamond'; font-size: 24px; color: var(--green); margin-bottom: 10px;">Thank you!</h3>
+                            <p style="color: var(--grey); font-size: 15px;">We'll be in touch within 24 hours.</p>
+                        </div>
+
+                        <p style="text-align: center; margin-top: 20px; font-size: 14px; color: var(--grey);">
+                            Prefer WhatsApp? <a href="https://wa.me/447365338565" style="color: var(--gold); text-decoration: none; font-weight: 600;">Message us directly →</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <img src="assets/logo.png" style="height: 48px; margin-bottom: 20px;" alt="Logo">
+                    <p style="color: var(--cream-mid); font-size: 14px;">Elevating property management and investment standards with precision and integrity.</p>
+                </div>
+                <div>
+                    <h4 class="syne" style="font-size: 14px; margin-bottom: 20px;">Company</h4>
+                    <ul style="list-style: none; font-size: 14px;">
+                        <li><a onclick="showPage('about')" style="cursor: pointer;">About Us</a></li>
+                        <li><a onclick="showPage('contact')" style="cursor: pointer;">Careers</a></li>
+                        <li><a onclick="showPage('contact')" style="cursor: pointer;">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="syne" style="font-size: 14px; margin-bottom: 20px;">Services</h4>
+                    <ul style="list-style: none; font-size: 14px;">
+                        <li><a onclick="showPage('property')" style="cursor: pointer;">Maintenance</a></li>
+                        <li><a onclick="showPage('property')" style="cursor: pointer;">Management</a></li>
+                        <li><a onclick="showPage('consultancy')" style="cursor: pointer;">Consultancy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="syne" style="font-size: 14px; margin-bottom: 20px;">Connect</h4>
+                    <ul style="list-style: none; font-size: 14px;">
+                        <li><a href="#">LinkedIn</a></li>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Twitter</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 40px; display: flex; justify-content: space-between; font-size: 13px; color: rgba(255,255,255,0.4);">
+                <p>&copy; 2026 PROPVIA SOLUTIONS LTD. All rights reserved.</p>
+                <p>Company No. 17044310</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MOBILE BOTTOM NAV -->
+    <div class="mobile-nav">
+        <div onclick="showPage('home')" style="text-align: center;">🏠<div style="font-size: 10px;">Home</div></div>
+        <div onclick="showPage('property')" style="text-align: center;">🏛️<div style="font-size: 10px;">Property</div></div>
+        <div onclick="showPage('consultancy')" style="text-align: center;">📈<div style="font-size: 10px;">Consult</div></div>
+        <div onclick="showPage('contact')" style="text-align: center;">✉️<div style="font-size: 10px;">Contact</div></div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script>
+        function showPage(pageId) {
+            // Hide all pages
+            document.querySelectorAll('.page-segment').forEach(p => p.classList.remove('active'));
+            // Show target page
+            const target = document.getElementById(pageId);
+            if(target) target.classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Header scroll effect reset
+            document.getElementById('site-header').classList.remove('scrolled');
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            document.getElementById('contact-form').style.display = 'none';
+            document.getElementById('success-message').style.display = 'block';
+        }
+
+        function openModal() {
+            showPage('contact');
+        }
+
+        // Header Scroll
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('site-header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for Reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>
