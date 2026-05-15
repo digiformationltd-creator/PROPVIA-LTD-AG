@@ -86,7 +86,7 @@
         header.scrolled { border-bottom: 1px solid var(--cream-dark); box-shadow: 0 2px 24px rgba(0,0,0,0.06); height: 75px; }
         @media (max-width: 767px) { header { height: 64px; } }
         .logo-wrapper { cursor: pointer; display: flex; align-items: center; }
-        .logo-wrapper img { height: 44px; width: auto; object-fit: contain; }
+        .logo-wrapper img { height: 44px; width: auto; object-fit: contain; filter: url(#remove-black); }
         nav.desktop-nav { position: absolute; left: 50%; transform: translateX(-50%); }
         @media (max-width: 1023px) { nav.desktop-nav { display: none; } }
         nav.desktop-nav ul { display: flex; list-style: none; gap: 32px; }
@@ -207,6 +207,14 @@
         .nav-tab.active { color: var(--green); }
         .nav-tab-center { width: 56px; height: 56px; background: var(--green); border-radius: 50%; display: flex; align-items: center; justify-content: center; transform: translateY(-12px); box-shadow: 0 8px 32px rgba(26,60,46,0.4); color: var(--cream); }
     </style>
+    <svg width="0" height="0" style="position: absolute;">
+        <filter id="remove-black" color-interpolation-filters="sRGB">
+            <feColorMatrix type="matrix" values="1 0 0 0 0
+                                              0 1 0 0 0
+                                              0 0 1 0 0
+                                              1 1 1 0 -0.1" />
+        </filter>
+    </svg>
 </head>
 <body>
 
@@ -1010,7 +1018,7 @@
                 <div class="container" style="display: grid; grid-template-columns: 48% 52%; gap: 40px;">
                     <!-- Left: Contact Info -->
                     <div class="glass-card-light" style="padding: 40px; border-top: 4px solid var(--green);">
-                        <img src="logo.png" style="height: 48px; margin-bottom: 24px;" alt="Logo">
+                        <img src="logo.png" style="height: 48px; margin-bottom: 24px; filter: url(#remove-black);" alt="Logo">
                         <div class="gold-rule"></div>
                         <div style="margin-top: 32px;">
                             <div style="display: flex; gap: 12px; margin-bottom: 16px;">
@@ -1058,7 +1066,7 @@
     <footer>
         <div class="footer-grid">
             <div class="footer-col">
-                <img src="logo.png" style="filter: brightness(0) invert(1); height: 40px; margin-bottom: 20px;" alt="Logo">
+                <img src="logo.png" style="filter: url(#remove-black); height: 40px; margin-bottom: 20px;" alt="Logo">
                 <p class="cormorant" style="font-style: italic; font-size: 16px; margin-bottom: 12px;">Professional Property & Consultancy Solutions</p>
                 <p style="font-size: 14px; color: var(--cream-dark);">PROPVIA SOLUTIONS LTD provides professional property support across the UK sector.</p>
             </div>
