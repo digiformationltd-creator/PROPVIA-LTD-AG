@@ -168,6 +168,22 @@
         .marquee-item { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--green); letter-spacing: 0.06em; padding: 0 20px; display: flex; align-items: center; }
         .marquee-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; margin: 0 16px; }
 
+        /* Responsive Grid Utilities */
+        .grid-split { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center; }
+        .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        
+        @media (max-width: 1023px) {
+            .grid-split { grid-template-columns: 1fr; gap: 40px; }
+            .grid-3 { grid-template-columns: repeat(2, 1fr); }
+            .grid-4 { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 767px) {
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+            .container { padding: 0 20px; }
+        }
+
         /* Specific Component Styles */
         .hero-home { min-height: 100vh; position: relative; background: var(--green); display: flex; align-items: center; overflow: hidden; padding: 100px 0; }
         .dot-grid-home { position: absolute; inset: 0; background-image: radial-gradient(circle, rgba(201,168,76,0.08) 1px, transparent 1px); background-size: 28px 28px; }
@@ -286,7 +302,7 @@
                 </svg>
 
                 <div class="container" style="position: relative; z-index: 1;">
-                    <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 60px; align-items: center;">
+                    <div class="grid-split">
                         
                         <!-- Left Column: Content -->
                         <div class="hero-left">
@@ -397,9 +413,9 @@
             </div>
 
             <!-- SECTION 3: COMPANY INTRODUCTION -->
-            <section style="background: var(--cream); padding: 120px 0;">
+            <section style="background: var(--cream); padding: 100px 0;">
                 <div class="container">
-                    <div style="display: grid; grid-template-columns: 1.1fr 1fr; gap: 80px; align-items: center;">
+                    <div class="grid-split" style="grid-template-columns: 1.1fr 1fr; gap: 80px;">
                         <div class="intro-left">
                             <p class="syne reveal" style="color: var(--gold); font-size: 11px; letter-spacing: 0.18em; margin-bottom: 20px;">WHO WE ARE</p>
                             <h2 class="cormorant reveal d1" style="font-size: clamp(34px, 5vw, 60px); color: var(--green); line-height: 1.1; margin-bottom: 32px;">
@@ -417,7 +433,7 @@
                         </div>
                         
                         <div class="intro-right">
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                            <div class="grid-2" style="gap: 16px;">
                                 <div class="glass-card stat-card reveal d1">
                                     <div class="icon-small"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
                                     <div class="cormorant" style="font-size: 56px; color: var(--gold);"><span class="counter" data-target="100">0</span>+</div>
@@ -453,7 +469,7 @@
                         <p class="reveal d2" style="font-size: 17px; color: var(--cream-mid);">Professional support solutions built for the property sector</p>
                     </div>
                     
-                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;">
+                    <div class="grid-2">
                         <!-- Card 1 -->
                         <div class="glass-card reveal d1" style="padding: 36px;">
                             <div style="display: flex; justify-content: space-between;">
@@ -567,9 +583,9 @@
             </section>
 
             <!-- SECTION 5: CONSULTANCY HIGHLIGHT -->
-            <section style="background: var(--cream); padding: 120px 0;">
+            <section style="background: var(--cream); padding: 100px 0;">
                 <div class="container">
-                    <div style="display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 60px; align-items: start;">
+                    <div class="grid-split" style="grid-template-columns: 0.9fr 1.1fr; gap: 60px; align-items: start;">
                         
                         <div class="consult-main-card reveal" style="background: var(--green); border-radius: 24px; padding: 48px; border-left: 4px solid var(--gold);">
                             <div style="width: 160px; height: 160px; margin: 0 auto 32px; animation: floatUpDown 4s ease-in-out infinite;">
@@ -591,7 +607,7 @@
                             </button>
                         </div>
                         
-                        <div class="consult-pills-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                        <div class="grid-2" style="gap: 16px;">
                             <div class="reveal d1" style="background: rgba(250,247,242,0.7); border: 1px solid rgba(201,168,76,0.2); border-left: 3px solid var(--gold); border-radius: 12px; padding: 18px 20px; backdrop-filter: blur(10px); transition: 0.3s; display: flex; align-items: center; gap: 12px;">
                                 <div>
                                     <h4 style="font-size: 15px; color: var(--green); font-weight: 600;">Business Consultancy</h4>
@@ -649,7 +665,7 @@
                         <p class="reveal d2" style="font-size: 16px; color: var(--grey);">What sets PROPVIA SOLUTIONS LTD apart</p>
                     </div>
                     
-                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+                    <div class="grid-4">
                         <div class="glass-card reveal d1" style="padding: 32px; text-align: center;">
                             <div style="width: 64px; height: 64px; background: rgba(201,168,76,0.12); border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; color: var(--green);">
                                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -953,7 +969,7 @@
 
                 <div style="background: var(--green); padding: 80px 0; color: var(--cream); text-align: center;">
                     <h2 class="cormorant" style="font-size: 40px; margin-bottom: 48px;">Why Choose Our Consultancy?</h2>
-                    <div class="container" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;">
+                    <div class="container grid-3" style="gap: 40px;">
                         <div class="reveal">
                             <h4 class="syne" style="color: var(--gold); font-size: 16px; margin-bottom: 12px;">Property-Focused</h4>
                             <p style="color: var(--cream-mid); font-size: 14px;">Sector-specific operational understanding</p>
@@ -986,7 +1002,7 @@
 
             <!-- Mission Section -->
             <section style="background: var(--cream); padding: 100px 0;">
-                <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;">
+                <div class="container grid-split" style="gap: 80px;">
                     <div class="reveal">
                         <h2 class="cormorant" style="font-size: 48px; color: var(--green); margin-bottom: 24px;">Our Mission</h2>
                         <p style="color: var(--grey); margin-bottom: 16px;">At PROPVIA SOLUTIONS LTD, we believe that every property deserves a high-end management approach, and every business deserves strategic clarity.</p>
@@ -1014,7 +1030,7 @@
             </section>
 
             <section style="background: var(--cream); padding: 100px 0;">
-                <div class="container" style="display: grid; grid-template-columns: 48% 52%; gap: 40px;">
+                <div class="container grid-split" style="grid-template-columns: 48% 52%; gap: 40px;">
                     <!-- Left: Contact Info -->
                     <div class="glass-card-light" style="padding: 40px; border-top: 4px solid var(--green);">
                         <img src="logo.png" style="height: 48px; margin-bottom: 24px; filter: url(#remove-black);" alt="Logo">
