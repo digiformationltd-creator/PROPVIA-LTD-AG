@@ -86,7 +86,7 @@
         header.scrolled { border-bottom: 1px solid var(--cream-dark); box-shadow: 0 2px 24px rgba(0,0,0,0.06); height: 75px; }
         @media (max-width: 767px) { header { height: 64px; } }
         .logo-wrapper { cursor: pointer; display: flex; align-items: center; }
-        .logo-wrapper img { height: 44px; width: auto; object-fit: contain; filter: url(#remove-black); }
+        .logo-wrapper img { height: 44px; width: 54px; object-fit: cover; object-position: left; filter: url(#remove-black); }
         nav.desktop-nav { position: absolute; left: 50%; transform: translateX(-50%); }
         @media (max-width: 1023px) { nav.desktop-nav { display: none; } }
         nav.desktop-nav ul { display: flex; list-style: none; gap: 32px; }
@@ -233,8 +233,7 @@
     <header id="main-header">
         <div class="header-container">
             <div class="logo-wrapper" onclick="showPage('home')">
-                <img src="logo.png" alt="PROPVIA SOLUTIONS LTD" onerror="this.style.display='none'; document.getElementById('logo-text').style.display='block'">
-                <div id="logo-text" class="logo-fallback syne">PROPVIA</div>
+                <img src="logo.png" alt="Logo">
             </div>
             <nav class="desktop-nav">
                 <ul>
