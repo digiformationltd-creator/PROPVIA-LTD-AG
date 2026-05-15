@@ -222,65 +222,95 @@
     <main>
         <!-- HOME PAGE -->
         <section id="home" class="page active">
-            <section class="mini-hero" style="background: var(--green); height: 100vh; color: var(--cream);">
-                <div class="dot-grid"></div>
-                <div class="svg-ring"></div>
-                <div class="container reveal active" style="z-index: 1;">
+            <!-- Hero Section -->
+            <section class="mini-hero" style="height: 100vh; color: var(--cream); position: relative; overflow: hidden;">
+                <div class="dot-grid" style="z-index: 1;"></div>
+                <div class="svg-ring" style="z-index: 1;"></div>
+                <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(26,60,46,0.85), rgba(26,60,46,0.92)), url('assets/hero.png'); background-size: cover; background-position: center; z-index: 0;"></div>
+                <div class="container reveal active" style="z-index: 2; position: relative;">
                     <p class="syne" style="color: var(--gold); margin-bottom: 24px; font-size: 14px; letter-spacing: 2px;">PREMIUM PROPERTY SOLUTIONS</p>
                     <h1 class="hero-title" style="font-size: clamp(3.5rem, 8vw, 6rem);">Elevating <br><span style="color: var(--gold);">Property</span> Standards.</h1>
-                    <p style="max-width: 600px; margin: 0 auto 48px; color: var(--cream-mid); font-size: 19px;">Professional maintenance, strategic management, and high-end consultancy for the UK's most demanding property assets.</p>
+                    <p style="max-width: 600px; margin: 0 auto 48px; color: var(--cream-mid); font-size: 19px; line-height: 1.7;">Professional maintenance, strategic management, and high-end consultancy for the UK's most demanding property assets.</p>
                     <div style="display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;">
-                        <button class="btn-nav" style="background: var(--gold); color: var(--green);" onclick="showPage('property')">Our Services</button>
-                        <button class="btn-nav" style="background: transparent; border: 1px solid var(--gold); color: var(--gold);" onclick="showPage('about')">The PropVia Story</button>
+                        <button class="btn-nav" style="background: var(--gold); color: var(--green); padding: 16px 32px; font-size: 15px;" onclick="showPage('property')">Our Services</button>
+                        <button class="btn-nav" style="background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 16px 32px; font-size: 15px;" onclick="showPage('about')">The PropVia Story</button>
                     </div>
                 </div>
             </section>
 
+            <!-- Specialized Services Highlight -->
             <section style="background: var(--cream); padding: 120px 0;">
                 <div class="container">
                     <div class="reveal" style="text-align: center; margin-bottom: 80px;">
                         <p class="syne" style="color: var(--gold); font-size: 12px; margin-bottom: 16px;">COMPREHENSIVE EXPERTISE</p>
                         <h2 class="cormorant" style="font-size: 48px; color: var(--green);">Precision in Every Project</h2>
-                        <div class="gold-rule" style="margin: 20px auto;"></div>
-                        <p style="max-width: 700px; margin: 0 auto; color: var(--grey);">We combine technical excellence with strategic oversight to provide a seamless property experience.</p>
+                        <div class="gold-rule" style="margin: 20px auto; width: 60px;"></div>
+                        <p style="max-width: 700px; margin: 0 auto; color: var(--grey);">We combine technical excellence with strategic oversight to provide a seamless property experience for owners and businesses alike.</p>
                     </div>
+
                     <div class="services-grid" style="padding: 0;">
+                        <!-- Service 1 -->
                         <div class="service-card reveal">
                             <div class="icon-wrapper"><span style="font-size: 32px;">🏛️</span></div>
                             <h3 class="syne" style="margin-top: 24px; font-size: 22px; color: var(--green);">Property Support</h3>
                             <div class="gold-rule"></div>
-                            <p style="color: var(--grey);">Professional upkeep and coordination for residential and commercial assets.</p>
-                            <a onclick="showPage('property')" style="display: block; margin-top: 20px; color: var(--gold); font-weight: 600; cursor: pointer;">Details →</a>
+                            <p style="color: var(--grey); margin-bottom: 24px;">Professional upkeep and repair coordination for residential and commercial assets across the UK.</p>
+                            <a onclick="showPage('property')" style="color: var(--gold); font-weight: 600; text-decoration: none; cursor: pointer; font-size: 14px;">View Maintenance Details →</a>
                         </div>
+                        
+                        <!-- Service 2 -->
                         <div class="service-card reveal" style="transition-delay: 0.1s;">
                             <div class="icon-wrapper"><span style="font-size: 32px;">📈</span></div>
                             <h3 class="syne" style="margin-top: 24px; font-size: 22px; color: var(--green);">Business Strategy</h3>
                             <div class="gold-rule"></div>
-                            <p style="color: var(--grey);">Strategic guidance for property businesses to optimize operations and growth.</p>
-                            <a onclick="showPage('consultancy')" style="display: block; margin-top: 20px; color: var(--gold); font-weight: 600; cursor: pointer;">Explore →</a>
+                            <p style="color: var(--grey); margin-bottom: 24px;">Strategic guidance for property-related businesses looking to optimize operations and scale growth.</p>
+                            <a onclick="showPage('consultancy')" style="color: var(--gold); font-weight: 600; text-decoration: none; cursor: pointer; font-size: 14px;">Explore Consultancy →</a>
                         </div>
                     </div>
                 </div>
             </section>
 
+            <!-- Stats Section -->
             <section style="background: var(--green); padding: 100px 0; color: var(--cream);">
                 <div class="container">
                     <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; text-align: center;">
                         <div class="reveal">
-                            <h4 class="cormorant" style="font-size: 56px; color: var(--gold);">£2.5B+</h4>
+                            <h4 class="cormorant" style="font-size: 56px; color: var(--gold); margin-bottom: 8px;">£2.5B+</h4>
                             <p class="syne" style="font-size: 12px; color: var(--cream-dark);">Assets Supported</p>
                         </div>
                         <div class="reveal" style="transition-delay: 0.1s;">
-                            <h4 class="cormorant" style="font-size: 56px; color: var(--gold);">150+</h4>
+                            <h4 class="cormorant" style="font-size: 56px; color: var(--gold); margin-bottom: 8px;">150+</h4>
                             <p class="syne" style="font-size: 12px; color: var(--cream-dark);">Active Portfolios</p>
                         </div>
                         <div class="reveal" style="transition-delay: 0.2s;">
-                            <h4 class="cormorant" style="font-size: 56px; color: var(--gold);">24H</h4>
+                            <h4 class="cormorant" style="font-size: 56px; color: var(--gold); margin-bottom: 8px;">24H</h4>
                             <p class="syne" style="font-size: 12px; color: var(--cream-dark);">Expert Response</p>
                         </div>
                         <div class="reveal" style="transition-delay: 0.3s;">
-                            <h4 class="cormorant" style="font-size: 56px; color: var(--gold);">UK</h4>
+                            <h4 class="cormorant" style="font-size: 56px; color: var(--gold); margin-bottom: 8px;">UK</h4>
                             <p class="syne" style="font-size: 12px; color: var(--cream-dark);">National Presence</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mission Preview Section -->
+            <section style="background: var(--cream-mid); padding: 120px 0;">
+                <div class="container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;">
+                    <div class="reveal">
+                        <p class="syne" style="color: var(--gold); font-size: 12px; margin-bottom: 16px;">OUR MISSION</p>
+                        <h2 class="cormorant" style="font-size: 56px; color: var(--green); line-height: 1.1; margin-bottom: 32px;">Elevating Standards, Empowering Growth.</h2>
+                        <p style="color: var(--grey); margin-bottom: 24px; font-size: 18px;">At PROPVIA SOLUTIONS LTD, we believe that every property deserves a high-end management approach, and every business deserves strategic clarity.</p>
+                        <p style="color: var(--grey); margin-bottom: 40px;">Founded on the principles of efficiency, transparency, and results, we serve as the backbone for property owners and entrepreneurs across England and Wales.</p>
+                        <button class="btn-nav" onclick="showPage('about')">Learn More About Us</button>
+                    </div>
+                    <div class="reveal" style="position: relative;">
+                        <div style="background: var(--green); width: 100%; aspect-ratio: 4/5; border-radius: 20px; overflow: hidden; box-shadow: var(--shadow);">
+                            <img src="assets/about.png" alt="Propvia Vision" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.85;">
+                        </div>
+                        <div style="position: absolute; bottom: -30px; right: -30px; background: var(--gold); padding: 30px; border-radius: 20px; box-shadow: var(--glow);">
+                            <p class="syne" style="color: var(--green); font-size: 24px; font-weight: 800;">100%</p>
+                            <p style="font-size: 12px; color: var(--green); opacity: 0.8;">Quality Commitment</p>
                         </div>
                     </div>
                 </div>
