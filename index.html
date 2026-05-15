@@ -45,8 +45,40 @@
         /* Layout */
         .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
         section { padding: 100px 0; }
-        .reveal { opacity: 0; transform: translateY(30px); transition: var(--transition); }
+        .reveal { 
+            opacity: 0; 
+            transform: translateY(40px); 
+            transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1s cubic-bezier(0.2, 0.8, 0.2, 1); 
+        }
         .reveal.active { opacity: 1; transform: translateY(0); }
+
+        .reveal-scale { 
+            opacity: 0; 
+            transform: scale(0.9); 
+            transition: opacity 0.8s ease, transform 0.8s ease; 
+        }
+        .reveal-scale.active { opacity: 1; transform: scale(1); }
+
+        @keyframes drawLine {
+            from { width: 0; }
+            to { width: 40px; }
+        }
+        .reveal.active .gold-rule {
+            animation: drawLine 1s ease forwards 0.5s;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero-home .reveal.active > * {
+            animation: slideUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+        .hero-home .reveal.active p:nth-child(1) { animation-delay: 0.1s; }
+        .hero-home .reveal.active h1 { animation-delay: 0.3s; }
+        .hero-home .reveal.active p:nth-child(3) { animation-delay: 0.5s; }
+        .hero-home .reveal.active div { animation-delay: 0.7s; }
 
         /* Navigation */
         header {
@@ -100,6 +132,13 @@
             position: absolute; width: 400px; height: 400px; top: -100px; right: -100px;
             border: 1px solid rgba(201,168,76,0.1); border-radius: 50%;
             animation: rotateSlow 80s linear infinite;
+        }
+        .dot-grid {
+            position: absolute; inset: 0;
+            background-image: radial-gradient(var(--gold) 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.1;
+            z-index: 0;
         }
         @keyframes rotateSlow { from { transform: rotate(0); } to { transform: rotate(360deg); } }
 
@@ -205,34 +244,80 @@
     
     <!-- HOME PAGE (Segment 2) -->
     <main id="home" class="page-segment active">
-        <section class="hero-home" style="background: var(--green); height: 100vh; display: flex; align-items: center; color: var(--cream);">
-            <div class="container">
+        <!-- Hero Section -->
+        <section class="hero-home" style="height: 100vh; position: relative; display: flex; align-items: center; overflow: hidden; background: var(--green);">
+            <div class="hero-bg-elements" style="position: absolute; inset: 0; z-index: 0;">
+                <img src="assets/hero.png" alt="Luxury Real Estate" style="width: 100%; height: 100%; object-fit: cover; filter: brightness(0.35);">
+                <div style="position: absolute; inset: 0; background: linear-gradient(to right, var(--green) 20%, transparent 80%);"></div>
+                <div class="svg-ring"></div>
+                <div class="dot-grid"></div>
+            </div>
+            
+            <div class="container" style="position: relative; z-index: 1;">
                 <div class="reveal active">
-                    <p class="syne" style="color: var(--gold); margin-bottom: 20px;">Premium Business Solutions</p>
-                    <h1 style="font-size: 80px; line-height: 1; margin-bottom: 24px;">Elevating <br><span style="color: var(--gold);">Property</span> Standards.</h1>
-                    <p style="max-width: 600px; font-size: 18px; color: var(--cream-mid); margin-bottom: 40px;">PROPVIA SOLUTIONS LTD delivers professional property maintenance, management support, and business consultancy services across the UK.</p>
-                    <div style="display: flex; gap: 20px;">
+                    <p class="syne" style="color: var(--gold); margin-bottom: 24px; font-size: 14px; letter-spacing: 2px;">PREMIUM PROPERTY SOLUTIONS</p>
+                    <h1 style="font-size: clamp(3.5rem, 8vw, 6rem); line-height: 1.1; color: var(--cream); margin-bottom: 32px;">
+                        Elevating <br><span style="color: var(--gold);">Property</span> Standards.
+                    </h1>
+                    <p style="max-width: 600px; font-size: 19px; color: var(--cream-mid); margin-bottom: 48px; line-height: 1.7;">
+                        PROPVIA SOLUTIONS LTD specializes in premium property maintenance, strategic management, and high-end consultancy for the UK's most demanding assets.
+                    </p>
+                    <div style="display: flex; gap: 24px; flex-wrap: wrap;">
                         <button class="btn-gold" onclick="showPage('property')">Our Services</button>
-                        <button class="btn-gold" style="background: transparent; border: 1px solid var(--gold); color: var(--gold);" onclick="showPage('contact')">Get In Touch</button>
+                        <button class="btn-gold" style="background: transparent; border: 1px solid var(--gold); color: var(--gold);" onclick="showPage('about')">The PropVia Story</button>
                     </div>
                 </div>
             </div>
         </section>
-        
-        <!-- Home Content Highlights -->
-        <section style="background: var(--cream);">
+
+        <!-- Home Content Blocks -->
+        <section style="background: var(--cream); padding: 120px 0;">
             <div class="container">
-                <div class="reveal" style="text-align: center; margin-bottom: 60px;">
-                    <h2 style="font-size: 48px; color: var(--green);">Comprehensive Solutions</h2>
+                <div class="reveal" style="text-align: center; margin-bottom: 80px;">
+                    <p class="eyebrow">COMPREHENSIVE EXPERTISE</p>
+                    <h2 style="font-size: 48px; color: var(--green); margin-bottom: 20px;">Precision in Every Project</h2>
+                    <p style="max-width: 700px; margin: 0 auto; color: var(--grey);">We combine technical excellence with strategic oversight to provide a seamless property experience.</p>
                 </div>
+
                 <div class="services-grid">
                     <div class="service-card reveal">
-                        <h3>Property Support</h3>
-                        <p>Reliable maintenance and management assistance for residential and commercial assets.</p>
+                        <div class="icon-wrapper"><span style="font-size: 32px;">🏛️</span></div>
+                        <h3 class="syne" style="margin-top: 24px; font-size: 22px; color: var(--green);">Property Support</h3>
+                        <div class="gold-rule"></div>
+                        <p style="color: var(--grey);">Expert maintenance and operational support tailored for residential and commercial property owners.</p>
+                        <a onclick="showPage('property')" style="display: inline-block; margin-top: 20px; color: var(--gold); font-weight: 600; cursor: pointer; font-size: 14px;">Learn More →</a>
                     </div>
-                    <div class="service-card reveal">
-                        <h3>Business Strategy</h3>
-                        <p>Expert consultancy to optimize your business operations and drive sustainable growth.</p>
+                    
+                    <div class="service-card reveal" style="transition-delay: 0.2s;">
+                        <div class="icon-wrapper"><span style="font-size: 32px;">📈</span></div>
+                        <h3 class="syne" style="margin-top: 24px; font-size: 22px; color: var(--green);">Business Strategy</h3>
+                        <div class="gold-rule"></div>
+                        <p style="color: var(--grey);">Strategic consultancy to help property-related businesses optimize workflows and scale effectively.</p>
+                        <a onclick="showPage('consultancy')" style="display: inline-block; margin-top: 20px; color: var(--gold); font-weight: 600; cursor: pointer; font-size: 14px;">View Consultancy →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section style="background: var(--green); padding: 100px 0; color: var(--cream);">
+            <div class="container">
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; text-align: center;">
+                    <div class="reveal">
+                        <h4 style="font-size: 48px; color: var(--gold); font-family: 'Cormorant Garamond';">£2.5B+</h4>
+                        <p style="font-size: 14px; color: var(--cream-mid);">Assets Supported</p>
+                    </div>
+                    <div class="reveal" style="transition-delay: 0.1s;">
+                        <h4 style="font-size: 48px; color: var(--gold); font-family: 'Cormorant Garamond';">150+</h4>
+                        <p style="font-size: 14px; color: var(--cream-mid);">Active Portfolios</p>
+                    </div>
+                    <div class="reveal" style="transition-delay: 0.2s;">
+                        <h4 style="font-size: 48px; color: var(--gold); font-family: 'Cormorant Garamond';">24H</h4>
+                        <p style="font-size: 14px; color: var(--cream-mid);">Expert Response</p>
+                    </div>
+                    <div class="reveal" style="transition-delay: 0.3s;">
+                        <h4 style="font-size: 48px; color: var(--gold); font-family: 'Cormorant Garamond';">UK</h4>
+                        <p style="font-size: 14px; color: var(--cream-mid);">National Presence</p>
                     </div>
                 </div>
             </div>
@@ -244,6 +329,7 @@
         <section class="mini-hero" style="background: var(--green); color: var(--cream);">
             <div class="hero-bg-elements">
                 <div class="svg-ring"></div>
+                <div class="dot-grid"></div>
             </div>
             <div class="container" style="position: relative; z-index: 1; padding-top: 120px;">
                 <div class="breadcrumb">
@@ -261,7 +347,7 @@
             <div class="container">
                 <div class="services-grid">
                     <!-- Card 1 -->
-                    <div class="service-card reveal">
+                    <div class="service-card reveal" style="transition-delay: 0.1s;">
                         <div class="card-header">
                             <div class="icon-wrapper">
                                 <svg viewBox="0 0 48 48">
@@ -285,7 +371,7 @@
                     </div>
 
                     <!-- Card 2 -->
-                    <div class="service-card reveal">
+                    <div class="service-card reveal" style="transition-delay: 0.2s;">
                         <div class="card-header">
                             <div class="icon-wrapper">
                                 <svg viewBox="0 0 48 48">
@@ -312,7 +398,7 @@
                     </div>
 
                     <!-- Card 3 -->
-                    <div class="service-card reveal">
+                    <div class="service-card reveal" style="transition-delay: 0.3s;">
                         <div class="card-header">
                             <div class="icon-wrapper">
                                 <svg viewBox="0 0 48 48">
@@ -337,7 +423,7 @@
                     </div>
 
                     <!-- Card 4 -->
-                    <div class="service-card reveal">
+                    <div class="service-card reveal" style="transition-delay: 0.4s;">
                         <div class="card-header">
                             <div class="icon-wrapper">
                                 <svg viewBox="0 0 48 48">
@@ -401,7 +487,7 @@
             <div class="container">
                 <div class="consultancy-grid">
                     <!-- Card 1 -->
-                    <div class="consult-card reveal">
+                    <div class="consult-card reveal" style="transition-delay: 0.1s;">
                         <div class="icon-wrapper" style="width: 56px; height: 56px; margin-bottom: 16px;">
                             <svg viewBox="0 0 32 32">
                                 <circle cx="16" cy="12" r="6" stroke="#1A3C2E" stroke-width="2" fill="none"/>
@@ -416,7 +502,7 @@
                     </div>
 
                     <!-- Card 2 -->
-                    <div class="consult-card reveal">
+                    <div class="consult-card reveal" style="transition-delay: 0.2s;">
                         <div class="icon-wrapper" style="width: 56px; height: 56px; margin-bottom: 16px;">
                             <svg viewBox="0 0 32 32">
                                 <circle cx="16" cy="16" r="10" stroke="#1A3C2E" stroke-width="2" fill="none"/>
@@ -431,7 +517,7 @@
                     </div>
 
                     <!-- Card 3 -->
-                    <div class="consult-card reveal">
+                    <div class="consult-card reveal" style="transition-delay: 0.3s;">
                         <div class="icon-wrapper" style="width: 56px; height: 56px; margin-bottom: 16px;">
                             <svg viewBox="0 0 32 32">
                                 <circle cx="12" cy="16" r="6" stroke="#1A3C2E" stroke-width="2" fill="none"/>
@@ -445,7 +531,7 @@
                     </div>
 
                     <!-- Card 4 -->
-                    <div class="consult-card reveal">
+                    <div class="consult-card reveal" style="transition-delay: 0.4s;">
                         <div class="icon-wrapper" style="width: 56px; height: 56px; margin-bottom: 16px;">
                             <svg viewBox="0 0 32 32">
                                 <rect x="12" y="12" width="8" height="8" stroke="#1A3C2E" stroke-width="2" fill="none"/>
@@ -460,7 +546,7 @@
                     </div>
 
                     <!-- Card 5 -->
-                    <div class="consult-card reveal">
+                    <div class="consult-card reveal" style="transition-delay: 0.5s;">
                         <div class="icon-wrapper" style="width: 56px; height: 56px; margin-bottom: 16px;">
                             <svg viewBox="0 0 32 32">
                                 <path d="M6 24 c2-6 8-6 10-2 M14 22 c2-8 10-8 12-4 M10 26 c1-4 4-4 5-2" stroke="#C9A84C" stroke-width="2" fill="none"/>
@@ -474,7 +560,7 @@
                     </div>
 
                     <!-- Card 6 -->
-                    <div class="consult-card reveal">
+                    <div class="consult-card reveal" style="transition-delay: 0.6s;">
                         <div class="icon-wrapper" style="width: 56px; height: 56px; margin-bottom: 16px;">
                             <svg viewBox="0 0 32 32">
                                 <path d="M6 14 L16 6 L26 14 v12 H6 Z" stroke="#1A3C2E" stroke-width="2" fill="none"/>
@@ -519,6 +605,7 @@
             <div class="hero-bg-elements">
                 <div class="svg-ring"></div>
                 <div class="svg-ring" style="top: auto; bottom: -100px; left: -100px; right: auto;"></div>
+                <div class="dot-grid"></div>
             </div>
             <div class="container" style="position: relative; z-index: 1; padding-top: 120px;">
                 <div class="breadcrumb">
